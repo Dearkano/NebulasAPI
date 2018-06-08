@@ -38,5 +38,31 @@ namespace NebulasAPI.Controllers
                 throw new ActionResultException(HttpStatusCode.BadRequest, "bad info");
             }
         }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody]Account account)
+        {
+
+            var name = account.name;
+            var password = account.password;
+            var accounts = MyDbContext.Accounts;
+            var ac = await (from i in accounts where name == i.name select i).FirstOrDefaultAsync();
+            if (ac != null)
+            {
+                if (ac.password == password)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    throw new ActionResultException(HttpStatusCode.Unauthorized, "password is not correct");
+                }
+            }
+            else
+            {
+                throw new ActionResultException(HttpStatusCode.Unauthorized, "nouser");
+            }
+
+
+        }
     }
 }
