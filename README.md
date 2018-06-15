@@ -5,4 +5,4 @@ Mysql API for Nebulas Dapp
 
 .Net Core 2.0.8 api项目，架设在腾讯云Windows Server 2012
 
-ip：111.231.75.113
+ip：111.231.75.113:3000
